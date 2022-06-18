@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es-es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="https://iconarchive.com/download/i85563/graphicloads/100-flat/currency.ico"
+        type="image/x-icon">
+    <link rel="stylesheet" href="style.css">
+    <!-- link fontawesome -->
+    <script src="https://kit.fontawesome.com/dd367eda64.js" crossorigin="anonymous"></script>
+    <title>¿Cuánto te vacuna el banco?</title>
+</head>
+
+<body>
+    <video  muted loop class="video-home" src="src/media/pexels-ivan-khmelyuk-7104083.mp4"></video>
+    <main>
+        <header class="hero">
+
+            <div class="content-hero">
+                <img src="" alt="Logo vacunado">
+                <h1>¿Querés saber cuanto te vacuna el banco con el interés?</h1>
+                <p class="regular-p">
+                    <span>OJO!</span> a las billeteras virtuales y las casas de crédito también les gusta aplicartela.
+                </p>
+                <h2>La posta sobre el interés, sin dolores de cabeza, está acá.</h2>
+                <p>(Para que después no digas: Uh quien ca#$! me mandó a pagar el mínimo?)</p>
+                <button class="circle-button"><i class="fas fa-solid fa-arrow-down"></i></button>
+             </div>
+        </header>
+
+        <section class="datos">
+            <h2>Comencemos por lo básico</h2>
+            <p class="regular-p">¿Qué querés calcular?</p>
+            <div class="selector-tipo">
+                <input type="radio" name="tipo-calc" id="prestamo"><i
+                    class="fas fa-solid fa-landmark main-icon">Prestamo</i>
+                <input type="radio" name="tipo-calc" id="tarjeta"><i
+                    class="fas fa-solid fa-credit-card main-icon">Tarjeta</i>
+            </div>
+            <p class="regular-p">¿Cuánto tiempo vas a tomarte para pagarlo?</p>
+            <div class="selector-tipo">
+                <div class="option-div">
+                    <p>Unos días</p>
+                    <input type="radio" name="cant-tiempo" id="dias">
+                </div>
+                <div class="option-div">
+                    <p>Algunos meses</p>
+                    <input type="radio" name="cant-tiempo" id="meses">
+                </div>
+            </div>
+            <p class="regular-p">¿Cuánto sería?</p>
+            <div class="tiempo-final">
+                <input type="number" name="tiempo-d" id="tiempo-d" placeholder="15" class="getter">
+                <label for="tiempo-d" class="etiquetas">Días</label>
+            </div>
+            <div class="tiempo-final">
+                <input type="tiempo-m" name="tiempo-m" id="tiempo-m" placeholder="48" class="getter">
+                <label for="tiempo-m" class="etiquetas">Meses</label>
+            </div>
+            </div>
+            <div>
+                <label for="deuda" class="etiquetas">Ingresá cuanto debés o cuanto vas a pedir</label>
+                <input type="number" name="deuda" id="deuda" placeholder="50000" class="getter">
+            </div>
+            <div>
+                <label for="interes" class="etiquetas">Ingresá el interés que te cobran (TNA) </label>
+                <input type="number" name="interes" id="interes" placeholder="72.5" class="getter">
+            </div>
+            <div>
+                <p class="regular-p">Elegí el porcentaje de IVA que te cobran:</p>
+                <select name="iva" id="iva">
+                    <option value="21" selected>21%</option>
+                    <option value="10.5">10.5%</option>
+                    <option value="0">0%</option>
+                </select>
+            </div>
+            <div>
+                <button type="submit" class="button-primary">Calcular!</button>
+                <p>Cerrá los ojos!</p>
+            </div>
+        </section>
+        <section class="calculator">
+            <h2>El <span>(duro)</span> momento de la verdad</h2>
+            <div>
+                <h3>Tu Banco te va a cobrar:</h3>
+                <p class="regular-p">Un total de <span>$500</span> pesos por dia.</p>
+                <p class="regular-p">Un total de <span>$500</span> pesos por mes.</p>
+                <p class="regular-p">Vas a terminar pagando <span>$500</span> de interés más los <span>pesos</span> de
+                    tu deuda.</p>
+                <p class="regular-p">Lo que equivale a <span>1.800</span> combos de Mc Donalds</p>
+            </div>
+            <div>
+                <h3>Esto incluye:</h3>
+                <div>
+                    <p class="regular-p"><span>$200</span> de IVA del <span>21%</span> sobre tu deuda.</p>
+                    <p class="regular-p"><span>$50</span> de IVA sobre los intereses de tu deuda.</p>
+                    <p class="regular-p"><span>$15</span> de IIBB (un 3% mensual)</p>
+                    <p class="regular-p">Y <span>NO</span> tiene en cuenta todas las otras boludeces que te pueden
+                        llegar a cobrar como
+                        Seguro de Vida, Mantenimiento, Renovación, Tasas de LCTH, etc.</p>
+                </div>
+                <button class="circle-button"><i class="fas fa-solid fa-arrow-down"></i></button>
+            </div>
+        </section>
+        <section class="contact">
+            <h2>¿Te ayudó o gustó mi App Web?</h2>
+            <div>
+                <p class="regular-p">Podés invitarme un cafecito ☕ acá:</p>
+                <a href="https://cafecito.app/" target="_blank" class="link-ext">Link Cafecito</a>
+            </div>
+            <div>
+                <p class="regular-p">O si taaaaaaanto te copaste, enviame un correo a <a
+                        href="mailto:juangomezpablo@gmail.com">juangomezpablo@gmail.com</a> y charlamos sobre algún
+                    trabajito extra, o algo fijo 😏 </p>
+                <p class="regular-p">De paso cañazo, mirate mi portfolio y CV en Github</p>
+                <a href="">Mi Github</a>
+            </div>
+        </section>
+    </main>
+    <footer class="sociales">
+
+
+        <div class="conect">
+            <h3>
+                Conectemos!
+            </h3>
+            <a href="#" target="__blank" class="link-social"><i class="fab fa-brands fa-instagram" ></i></a>
+            <a href="#" target="__blank" class="link-social"><i class="fab fa-brands fa-linkedin"></i></a>
+            <a href="#" target="__blank" class="link-social"><i class="fas fa-solid fa-at"></i></i></a>
+        </div>
+        <div>
+            <p>Juan Pablo Gomez 2022. Todos los derechos reservados.</p>
+        </div>
+
+    </footer>
+
+    <script src="index.js"></script>
+</body>
+
+</html>
