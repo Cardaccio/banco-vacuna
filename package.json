@@ -1,0 +1,19 @@
+{
+  "name": "vacunas",
+  "version": "1.0.0",
+  "description": "calculate interest rate",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Cardaccio/banco-vacuna.git"
+  },
+  "author": "jpgomez",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Cardaccio/banco-vacuna/issues"
+  },
+  "homepage": "https://github.com/Cardaccio/banco-vacuna#readme"
+}
