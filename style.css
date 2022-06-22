@@ -32,6 +32,11 @@ body {
     text-align: center;
 }
 
+.login:hover{
+    background-color: #aa3c0d;
+    border: 1px solid white;
+}
+
 .login i{
     margin-left: 1rem;
     font-size: 1.8rem;
@@ -40,9 +45,13 @@ body {
 .video-home {
     position: fixed;
     right: 0;
+    top: 0;
     bottom: 0;
-    max-width: 100vw;
-    height: auto;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    object-fit: cover;
+
 }
 
 main {
@@ -82,7 +91,7 @@ main {
 }
 
 .page {
-    width: 117vh;
+    width: 100%;
     height: 100%;
     display: flex;
     align-items: center;
@@ -97,14 +106,14 @@ main {
     max-width: fit-content;
 }
 
-.calculator .regular-p, h3{
+.calculator .regular-p, .title-calc{
     margin-bottom: 1.5rem;
 }
 
 .content-hero {
-
+    width: 70vw;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, 1fr);
     grid-template-rows: 2.5fr 0.5fr 1fr 0.5fr 0.5fr;
     gap: 0.5rem 1rem;
     grid-auto-flow: row;
@@ -461,6 +470,7 @@ h3 {
 .conect {
     display: flex;
     align-items: center;
+    justify-content: center;
 }
 
 .conect h3 {
@@ -475,4 +485,34 @@ h3 {
 
 .link-social:hover {
     color: #ff5d15;
+}
+
+@media screen and (min-width:1400px) {
+    .hero{
+        margin-bottom: 5rem;
+    }
+
+    .second{
+        margin-top: 3rem;
+
+    }
+    .h2-datos{
+        margin: 1rem 0;
+    }
+    .selector-tipo{
+        height: 8rem;
+        padding: 1rem;
+    }
+
+}
+
+@media screen and (min-width:1000px) and (max-widht:1399){
+    html{
+        font-size: 60%;
+    }
+
+    .h1-hero{
+        font-size: 3rem;
+    }
+    
 }

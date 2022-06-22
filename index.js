@@ -1,7 +1,7 @@
 //Pasador de paginas
 
 const pages = document.querySelectorAll(".page");
-const translateAmount = 100;
+const translateAmount = 110;
 let translate = 0;
 slide = (direction) => {
     direction === "next" ? translate -= translateAmount : translate += translateAmount;
@@ -59,10 +59,12 @@ for (let user in users) {
 //Registro de consultas
 
 let datos_conslt = [];
+let cant_conslt = 0;
 
 class Consulta {
     constructor(numero=0) {
         this.numero = numero+1;
+        cant_conslt = cant_conslt+numero;
     }
     
     saveDatos(){
