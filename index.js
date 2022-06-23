@@ -10,6 +10,7 @@ slide = (direction) => {
     );
 };
 
+let cantUsers = 0;
 
 //Registro usuario
 class Usuario {
@@ -18,6 +19,8 @@ class Usuario {
         this.nombre = nombre;
         this.mail = mail;
         this.edad = edad;
+        this.id = cantUsers+1;
+        cantUsers ++;
     }
 
     guardaConsulta(consulta) {
@@ -56,38 +59,48 @@ for (let user in users) {
     console.log(users[user]);
 };
 
+
+let busqueda = users.filter(function (users){return users.id>0});
+console.log(busqueda);
+
+
+
 //Registro de consultas
 
 let datos_conslt = [];
 let cant_conslt = 0;
+let bigMac = 1200;
 
 class Consulta {
-    constructor(numero=0) {
-        this.numero = numero+1;
-        cant_conslt = cant_conslt+numero;
+    constructor(numero = 0) {
+        this.numero = numero + 1;
+        cant_conslt = cant_conslt + numero;
+        let date = new Date;
+
     }
-    
-    saveDatos(){
-        datos_conslt = [ {tipoCaluculo:tipoCalc},
-            {tiempo: tipoTime},
-            {cantTiempo: tiempo}, 
-            {monto: amount},
-            {interes: interest},
-            {tasaCaluda: tasaCalc},
-            {tasaIva: iva},
-            {interesDia: intDiario},
-            {interesMes: intMes},
-            {deudaDia: deudaDiaria},
-            {deudaMensual: deudaMes},
-            {ivaDelSaldo: ivaSaldo},
-            {ivaDeInteres: ivaInt},
-            {totalInteres: intTotal}
-        ]; 
+
+    saveDatos() {
+        datos_conslt = [{ tipoCaluculo: tipoCalc },
+        { tiempo: tipoTime },
+        { cantTiempo: tiempo },
+        { monto: amount },
+        { interes: interest },
+        { tasaCaluda: tasaCalc },
+        { tasaIva: iva },
+        { interesDia: intDiario },
+        { interesMes: intMes },
+        { deudaDia: deudaDiaria },
+        { deudaMensual: deudaMes },
+        { ivaDelSaldo: ivaSaldo },
+        { ivaDeInteres: ivaInt },
+        { totalInteres: intTotal }
+        ];
     }
 
     verDatos() {
         console.log("Consulta: ", this.numero)
-        for(let dato in datos_conslt){
+        console.log("Fecha: ", this.date)
+        for (let dato in datos_conslt) {
             console.log(datos_conslt[dato]);
         };
 
@@ -96,8 +109,8 @@ class Consulta {
 
 
 
-//calculador prestamo
 
+/*
 let tipoCalc = 'prestamo';
 let tipoTime = "dias"
 let tiempo = 30;
@@ -105,7 +118,65 @@ let amount = 50000;
 let interest = 72.5;
 let tasaCalc;
 let iva = [1.21, 1.105, 1];
-let bigMac = 1200;
+
+*/
+
+//Calculadora
+
+function tipoCalc() {
+    let entrada = prompt('Ingrese P para "prestamo" o T para "Tarjeta"').toLocaleUpperCase();
+    while (entrada != 'P' || entrada != 'T')
+        if (entrada == 'P') {
+            value = 'prestamo'
+            return value
+        } else if (entrada == 'T') {
+            value = 'tarjeta'
+            return value
+        } else {
+            entrada = prompt('No ingreso un valor valido.\nIngrese P para "prestamo" o T para "Tarjeta"').toLocaleUpperCase();
+        }
+};
+
+tipoCalc = tipoCalc();
+
+function tipoTime() {
+    let entrada = prompt('Ingrese D para "dias" o M para "meses"').toLocaleUpperCase();
+    while (entrada != 'D' || entrada != 'M')
+        if (entrada == 'D') {
+            value = 'dias'
+            return value
+        } else if (entrada == 'M') {
+            value = 'meses'
+            return value
+        } else {
+            entrada = prompt('No ingreso un valor valido.\nIngrese D para "dias" o M para "meses"').toLocaleUpperCase();
+        }
+};
+
+tipoTime = tipoTime()
+let tiempo = parseInt(prompt(`Ingrese la cantidad de ${tipoTime}`));
+let amount = parseInt(prompt("Ingrese monto a tomar"));
+let interest = parseFloat(prompt('Ingrese la TNA'));
+function iva() {
+    let valoresIva = [1.21, 1.105, 1];
+    let entrada = parseFloat(prompt('Ingrese valor de IVA: 21, 10.5 o 0'));
+    while (entrada != 21 || entrada != 10.5 || entrada != 0)
+        if (entrada == 21) {
+            value = valoresIva[0]
+            return value
+        } else if (entrada == 10.5) {
+            value = valoresIva[1]
+            return value
+        } else if (entrada == 0) {
+            value = valoresIva[2]
+            return value
+        }
+        else {
+            entrada = Math.round(parseFloat(prompt(' Valor no valido\nIngrese valor de IVA: 21, 10.5 o 0')));
+        }
+}
+
+iva = iva();
 
 let intDiario;
 let intMes;
@@ -116,16 +187,10 @@ let ivaInt;
 let intTotal;
 
 
-// iva.push(parseFloat(prompt('Ingrese el IVA de su preferencia')))
-
-// console.log(iva)
-
-
-//Deuda diaria
 if (tipoTime == 'dias') {
     tasaCalc = ((interest / 12) / 30);
     intDiario = ((amount * tasaCalc) / 100);
-    ivaInt = intDiario * iva[0];
+    ivaInt = intDiario * iva;
     deudaDiaria = intDiario + ivaInt;
     intTotal = intDiario * tiempo;
 
@@ -134,7 +199,7 @@ if (tipoTime == 'dias') {
     tasaCalc = (interest / 12);
     intMes = ((amount * tasaCalc) / 100);
     deudaDiaria = deudaMes / 30;
-    ivaInt = intMes * iva[0];
+    ivaInt = intMes * iva;
     deudaMes = intMes + ivaInt;
     intTotal = intMes * tiempo;
 
@@ -142,7 +207,7 @@ if (tipoTime == 'dias') {
     alert('Te falta elegir el tiempo que te vas a tomar')
 }
 
-ivaSaldo = (amount * iva[0]) / 100;
+ivaSaldo = (amount * iva) / 100;
 let totalBigMac = (intTotal + ivaInt) / bigMac;
 let deudaTotal = amount + ivaInt + ivaSaldo + intTotal;
 
@@ -155,7 +220,17 @@ console.log('Iva del saldo: ', ivaSaldo);
 console.log('Total de Big Mac: ', totalBigMac);
 
 
+
 let consult_1 = new Consulta();
+
+let calcular = prompt('Ingrese OK para volver a calcular').toLocaleUpperCase();
+
+let consult_2 = new Consulta();
+
+
+
+
 consult_1.saveDatos();
 
 consult_1.verDatos();
+
