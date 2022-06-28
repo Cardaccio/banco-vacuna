@@ -15,10 +15,43 @@
 <body>
     <video muted loop class="video-home" src="src/media/pexels-ivan-khmelyuk-7104083.mp4"></video>
     <header>
-        <a href="#" class="login">Login / Register<i class="fas fa-solid fa-user-astronaut"></i></a>
+        <div class="center">
+            <input type="checkbox" id="show">
+            <label for="show" class="show-btn login">Login / Register<i
+                    class="fas fa-solid fa-user-astronaut"></i></label>
+            <div class="container" id="cont-user">
+                <label for="show" class="close-btn fas fa-solid fa-times" title="close"></label>
+                <div>
+                    <h3 class="log-h3" id="mensaje">Registrate!</h3>
+                </div>
+                <div id="registro">
+                    <form action="#">
+                        <div class="data">
+                            <label>Nombre</label>
+                            <input type="text" required placeholder="Tu Nombre" id="userName">
+                        </div>
+                        <div class="data">
+                            <label>Email</label>
+                            <input type="email" required placeholder="nombre@mail.com" id="userMail">
+                        </div>
+                        <div class="data">
+                            <label>Edad</label>
+                            <input type="number" required placeholder="No mientas" id="userAge">
+                        </div>
+                        <div class="forgot-pass">
+                            <a href="#">Ya te registraste?</a>
+                        </div>
+                        <div class="btn">
+                            <div class="inner"></div>
+                            <button type="submit" id="registerBtn" onclick="Registrarse()">Registrarse</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </header>
     <main>
-        <div class="container">
+        <div class="main-container">
             <div class="pages">
                 <section class="page hero">
                     <div class="content-hero">
@@ -46,14 +79,14 @@
                         <div class="selector-tipo">
                             <ul class="selector-ul">
                                 <li class="opt-li">
-                                    <input type="radio" name="tipo-calc" id="prestamo">
+                                    <input type="radio" name="tipo-calc" id="prestamo" required>
                                     <label for="prestamo"><i
                                             class="fas fa-solid fa-landmark main-icon"></i><br>Prestamo</label>
                                 </li>
                                 <li class="opt-li">
                                     <input type="radio" name="tipo-calc" id="tarjeta">
-                                    <label for="tarjeta"><i
-                                            class="fas fa-solid fa-credit-card main-icon"></i><br> Tarjeta</label>
+                                    <label for="tarjeta"><i class="fas fa-solid fa-credit-card main-icon"></i><br>
+                                        Tarjeta</label>
                                 </li>
                             </ul>
                         </div>
@@ -61,38 +94,39 @@
                         <div class="selector-tipo">
                             <ul class="selector-ul">
                                 <li class="opt-li">
-                                    <input type="radio" name="tipo-time" id="dias">
+                                    <input type="radio" name="tipo-time" id="dias" required>
                                     <label for="dias">Unos dias</label>
                                 </li>
                                 <li class="opt-li">
-                                    <input type="radio" name="tipo-time" id="meses">
+                                    <input type="radio" name="tipo-time" id="meses" required>
                                     <label for="meses">Algunos meses</label>
                                 </li>
                             </ul>
                         </div>
                         <p class="regular-p">¿Cuánto sería?</p>
                         <div class="tiempo-final">
-                            <input type="number" name="tiempo-d" id="tiempo-d" placeholder=" " class="getter">
+                            <input type="number" name="tiempo-d" id="tiempo-d" placeholder=" " class="getter" required>
                             <label for="tiempo-d" class="etiquetas">Días</label>
                         </div>
                         <div class="tiempo-final">
-                            <input type="number" name="tiempo-m" id="tiempo-m" placeholder=" " class="getter">
+                            <input type="number" name="tiempo-m" id="tiempo-m" placeholder=" " class="getter" required>
                             <label for="tiempo-m" class="etiquetas">Meses</label>
                         </div>
 
                         <div class="amount">
-                            <input type="number" name="deuda" id="deuda" placeholder=" " class="getter pesos">
+                            <input type="number" name="deuda" id="deuda" placeholder=" " class="getter pesos" required>
                             <label for="deuda" class="etiquetas">Monto</label>
-                            
+
                         </div>
                         <div class="rate">
-                            <input type="number" name="interes" id="interes" placeholder=" " class="getter porcentaje">
+                            <input type="number" name="interes" id="interes" placeholder=" " class="getter porcentaje"
+                                required>
                             <label for="interes" class="etiquetas">TNA</label>
-                           
+
                         </div>
                         <div>
                             <p class="regular-p">Elegí el porcentaje de IVA que te cobran:</p>
-                            <select name="iva" id="iva" class="selector-iva">
+                            <select name="iva" id="iva" class="selector-iva" required>
                                 <option value="21" selected>21%</option>
                                 <option value="10.5">10.5%</option>
                                 <option value="0">0%</option>
@@ -107,7 +141,7 @@
                 </section>
                 <section class="page calculator">
                     <button onClick="slide('prev')" class="button-arrow" role="button"><i
-                        class="fas fa-solid fa-arrow-up"></i></button>
+                            class="fas fa-solid fa-arrow-up"></i></button>
                     <h2>El <span>(duro)</span> momento de la verdad</h2>
                     <div>
                         <h3 class="title-calc">Tu Banco te va a cobrar:</h3>
@@ -143,7 +177,7 @@
                 </section>
                 <section class="page contact">
                     <button onClick="slide('prev')" class="button-arrow " role="button"><i
-                        class="fas fa-solid fa-arrow-up"></i></button>
+                            class="fas fa-solid fa-arrow-up"></i></button>
                     <h2>¿Te ayudó o gustó mi App Web?</h2>
                     <div>
                         <p class="regular-p">Podés invitarme un cafecito ☕ acá:</p>
@@ -174,9 +208,12 @@
             <h3>
                 Conectemos!
             </h3>
-            <a href="https://www.instagram.com/juanpablocardaccio/" target="__blank" class="link-social"><i class="fab fa-brands fa-instagram"></i></a>
-            <a href="https://www.linkedin.com/in/juan-pablo-gomez-99766114a/" target="__blank" class="link-social"><i class="fab fa-brands fa-linkedin"></i></a>
-            <a href="mailto:juangomezpablo@gmail.com" target="__blank" class="link-social"><i class="fas fa-solid fa-at"></i></i></a>
+            <a href="https://www.instagram.com/juanpablocardaccio/" target="__blank" class="link-social"><i
+                    class="fab fa-brands fa-instagram"></i></a>
+            <a href="https://www.linkedin.com/in/juan-pablo-gomez-99766114a/" target="__blank" class="link-social"><i
+                    class="fab fa-brands fa-linkedin"></i></a>
+            <a href="mailto:juangomezpablo@gmail.com" target="__blank" class="link-social"><i
+                    class="fas fa-solid fa-at"></i></i></a>
         </div>
 
 

@@ -32,34 +32,63 @@ class Usuario {
 }
 
 
-let userName;
-let userMail;
-let userAge;
 let users = [];
 
-function askData() {
-    userName = prompt('Ingrese su nombre');
-    userMail = prompt('Ingrese su email');
-    userAge = prompt('Ingrese su edad');
+function Registrarse() {
+    let userName = document.getElementById("userName");
+    let userMail = document.getElementById("userMail");
+    let userAge = document.getElementById("userAge");
+
+    let mensaje = document.getElementById("mensaje");
+    let divReg = document.getElementById("registro");
+
+    if (users.includes(userMail.value)) {
+        
+        mensaje.innerText = "Ya estas registrad@!";
+        divReg.className = "registro-ok";
+
+    }else{
+        users.push(new Usuario(userName.value, userMail.value, userAge.value))
+        mensaje.innerText= "Muchas gracias por registrarte!";
+        divReg.className = "registro-ok";
+
+
+    }
+    
+};
+
+
+//Crear usuarios
+function askData(count) {
+
+    for (let i = 0; i < count; i++) {
+
+        let userName = prompt('Ingrese su nombre');
+
+        let userMail = prompt('Ingrese su email');
+
+        let userAge = prompt('Ingrese su edad');
+
+        users.push(new Usuario(userName, userMail, userAge));
+
+    }
+
 }
 
-askData();
-
-const user_one = new Usuario(userName, userMail, userAge);
-
-askData();
-
-const user_two = new Usuario(userName, userMail, userAge);
+//askData(parseInt(prompt('Ingrese cantidad de usuarios')));
 
 
-users.push(user_one);
-users.push(user_two);
 
+//asignar una variable a un usuario
+let user_one = users.find(function (user) { return user.id == 1 });
+
+
+//Imprimir todos los usuarios
 for (let user in users) {
     console.log(users[user]);
 };
 
-
+//busqueda de varios usuarios
 let busqueda = users.filter(function (users) { return users.id > 0 });
 console.log(busqueda);
 
@@ -115,7 +144,7 @@ function tipoIva() {
 
 let datos_conslt = [];
 let cant_conslt = 0;
-let bigMac = 1200;
+let bigMac = 1040;
 
 let tipoCalc;
 let tipoTime;
@@ -138,7 +167,7 @@ let deudaTotal;
 class Consulta {
     constructor() {
         this.numero = cant_conslt + 1;
-        cant_conslt ++;
+        cant_conslt++;
         this.date = new Date();
 
     }
@@ -215,14 +244,14 @@ class Consulta {
 }
 
 
-
+/*
 let consult_1 = new Consulta();
 consult_1.consultar();
 
 let calcular = prompt('Ingrese OK para volver a calcular').toLocaleUpperCase();
 
 let consult_2;
-if (calcular=='OK'){
+if (calcular == 'OK') {
     consult_2 = new Consulta();
 
     consult_2.consultar();
@@ -236,3 +265,4 @@ consult_1.saveDatos();
 consult_1.verDatos();
 consult_2.verDatos();
 
+*/
