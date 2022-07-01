@@ -79,12 +79,12 @@
                         <div class="selector-tipo">
                             <ul class="selector-ul">
                                 <li class="opt-li">
-                                    <input type="radio" name="tipo-calc" id="prestamo" required>
+                                    <input type="radio" name="tipo-calc" id="prestamo" value="prestamo" required>
                                     <label for="prestamo"><i
                                             class="fas fa-solid fa-landmark main-icon"></i><br>Prestamo</label>
                                 </li>
                                 <li class="opt-li">
-                                    <input type="radio" name="tipo-calc" id="tarjeta">
+                                    <input type="radio" name="tipo-calc" id="tarjeta" value="tarjeta">
                                     <label for="tarjeta"><i class="fas fa-solid fa-credit-card main-icon"></i><br>
                                         Tarjeta</label>
                                 </li>
@@ -94,25 +94,20 @@
                         <div class="selector-tipo">
                             <ul class="selector-ul">
                                 <li class="opt-li">
-                                    <input type="radio" name="tipo-time" id="dias" required>
+                                    <input type="radio" name="tipo-time" id="dias" value="dias" required>
                                     <label for="dias">Unos dias</label>
                                 </li>
                                 <li class="opt-li">
-                                    <input type="radio" name="tipo-time" id="meses" required>
+                                    <input type="radio" name="tipo-time" id="meses" value="meses">
                                     <label for="meses">Algunos meses</label>
                                 </li>
                             </ul>
                         </div>
                         <p class="regular-p">¿Cuánto sería?</p>
                         <div class="tiempo-final">
-                            <input type="number" name="tiempo-d" id="tiempo-d" placeholder=" " class="getter" required>
-                            <label for="tiempo-d" class="etiquetas">Días</label>
+                            <input type="number" name="tiempo" id="time" placeholder=" " class="getter" required>
+                            <label for="tiempo-d" class="etiquetas" id="timeLabel">Días/Meses</label>
                         </div>
-                        <div class="tiempo-final">
-                            <input type="number" name="tiempo-m" id="tiempo-m" placeholder=" " class="getter" required>
-                            <label for="tiempo-m" class="etiquetas">Meses</label>
-                        </div>
-
                         <div class="amount">
                             <input type="number" name="deuda" id="deuda" placeholder=" " class="getter pesos" required>
                             <label for="deuda" class="etiquetas">Monto</label>
@@ -134,7 +129,7 @@
                         </div>
                         <div>
                             <button type="submit" class="circle-button" role="button"
-                                onClick="slide('next')">Calcular!</button>
+                                onClick="slide('next')" id="ejecCalc">Calcular!</button>
 
                         </div>
                     </div>
@@ -145,21 +140,20 @@
                     <h2>El <span>(duro)</span> momento de la verdad</h2>
                     <div>
                         <h3 class="title-calc">Tu Banco te va a cobrar:</h3>
-                        <p class="regular-p">Un total de <span>$500</span> pesos por dia.</p>
-                        <p class="regular-p">Un total de <span>$500</span> pesos por mes.</p>
-                        <p class="regular-p">Vas a terminar pagando <span>$500</span> de interés más los
-                            <span>pesos</span>
+                        <p class="regular-p">Un total de <span id="pesosDias">$500</span> pesos por dia.</p>
+                        <p class="regular-p">Un total de <span id="pesosMes">$500</span> pesos por mes.</p>
+                        <p class="regular-p">Vas a terminar pagando <span id="totInt">$500</span> de interés más los
+                            <span id="montoDeuda">pesos</span>
                             de
                             tu deuda.
                         </p>
-                        <p class="regular-p">Lo que equivale a <span>1.800</span> combos de Mc Donalds</p>
+                        <p class="regular-p">Lo que equivale a <span id="totBig">1.800</span> combos de Mc Donalds</p>
                     </div>
                     <div>
                         <h3 class="title-calc">Esto incluye:</h3>
                         <div>
-                            <p class="regular-p"><span>$200</span> de IVA del <span>21%</span> sobre tu deuda.</p>
-                            <p class="regular-p"><span>$50</span> de IVA sobre los intereses de tu deuda.</p>
-                            <p class="regular-p"><span>$15</span> de IIBB (un 3% mensual)</p>
+                            <p class="regular-p"><span id="ivaDeuda">$200</span> de IVA del <span>21%</span> sobre tu deuda.</p>
+                            <p class="regular-p"><span id="ivaInt">$50</span> de IVA sobre los intereses de tu deuda.</p>
                             <p class="regular-p">Y <span>NO</span> tiene en cuenta todas las otras boludeces que te
                                 pueden
                                 llegar a cobrar como
@@ -219,7 +213,7 @@
 
     </footer>
 
-    <script src="index.js"></script>
+    <script src="calc.js"></script>
 </body>
 
 </html>
