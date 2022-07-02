@@ -60,6 +60,7 @@ function Registrarse() {
 
 //Registro de consultas
 
+let consultas = [];
 let datos_conslt = [];
 let cant_conslt = 0;
 let bigMac = 900;
@@ -72,41 +73,36 @@ let tipoCalc;
 let tipoTime;
 
 
-//let timeRadio = document.getElementsByName("tipo-time");
-
-if(document.getElementById("dias").checked==true){
-    tipoTime = "dias";
-    labelChange();
-}else if (document.getElementById("meses").checked==true){
-    tipoTime = "meses";
-    labelChange();
-};
-/*
+let timeRadio = document.getElementsByName("tipo-time");
 for (let opt of timeRadio) {
-    opt.addEventListener("change", function (e) {
-        tipoTime = e.target.value;
-        return tipoTime;
-        console.log(tipoTime);
-    });
+    opt.addEventListener("change", labelChange);
 };
-tipoTime = document.getElementsByName("tipo-time").value;
-*/
-console.log(tipoTime);
 
 function labelChange(){
     let timeLabel = document.getElementById("timeLabel");
-    if(document.getElementById("dias").checked==true){
-        timeLabel.innerText = "Meses";
-    } else if (document.getElementById("meses").checked==true){
+    if(document.getElementById("dias").checked){
         timeLabel.innerText = "Dias";
+        tipoTime = "dias";
+    } else if (document.getElementById("meses").checked){
+        timeLabel.innerText = "Meses";
+        tipoTime = "meses";
     }else{
         timeLabel.innerText = "Dias/ Meses";
-    }
-    ;
-    console.log(tipoTime);
+    };
 }
 
 
+function cambioCalc() {
+    let calculo = document.getElementById("calculo");
+    if(document.getElementById("prestamo").checked){
+        calculo.innerText = "Prestamo";
+    }else if(document.getElementById("tarjeta").checked){
+        calculo.innerText = "Tarjeta"
+    }else{
+        calculo.innerText = "Tarjeta/ Prestamo"
+    }
+    
+}
 
 btnCalcular.addEventListener("click", calcularInt);
 
@@ -123,38 +119,56 @@ let deudaTotal;
 function calcularInt(e) {
 
     e.preventDefault();
-
-
+    cambioCalc();
 
     let tiempo = parseInt( document.getElementById("time").value);
     let amount = parseFloat( document.getElementById("deuda").value);
     let interest = parseFloat( document.getElementById("interes").value);
     let selectIva = document.getElementById("iva");
-    let iva = parseFloat(selectIva.options[selectIva.selectedIdex].value);
+    let iva = parseFloat(selectIva.value);
+    let p_x= document.getElementById("x_p");
+    let totInt = document.getElementById("totInt")
+    let montoDeuda = document.getElementById("montoDeuda");
+    let totBig = document.getElementById("totBig");
+    let ivaDeudaInt = document.getElementById("ivaDeudaInt");
+    let ivaDeuda = document.getElementById("ivaDeuda");
+    let ivaChosen = document.getElementById("ivaChosen");
+    let totDev = document.getElementById("totDev");
 
     if (tipoTime == 'dias') {
         let tasaCalc = ((interest / 12) / 30);
         intDiario = ((amount * tasaCalc) / 100);
-        ivaInt = intDiario * iva;
+        ivaInt = (intDiario * iva) /100;
         deudaDiaria = intDiario + ivaInt;
         intTotal = intDiario * tiempo;
+        p_x.innerHTML = `Un total de <span>$ ${deudaDiaria.toFixed(2)}</span> pesos por dia.`
 
 
     } else if (tipoTime == 'meses') {
         let tasaCalc = (interest/ 12);
         intMes = ((amount * tasaCalc) / 100);
-        deudaDiaria = deudaMes / 30;
-        ivaInt = intMes * iva;
+        ivaInt = (intMes * iva)/100;
         deudaMes = intMes + ivaInt;
         intTotal = intMes * tiempo;
+        p_x.innerHTML = `Un total de <span>$ ${deudaMes.toFixed(2)}</span> pesos por mes.`
 
     } else {
         alert('Te falta elegir el tiempo que te vas a tomar')
     }
 
-    ivaSaldo = (amount.value * iva) / 100;
+    ivaSaldo = (amount * iva) / 100;
     totalBigMac = (intTotal + ivaInt) / bigMac;
     deudaTotal = amount + ivaInt + ivaSaldo + intTotal;
+
+    totDev.innerText = `$ ${deudaTotal.toFixed(2)}`
+    totInt.innerText = `$ ${intTotal.toFixed(2)}`;
+    montoDeuda.innerText = `$ ${amount}`;
+    totBig.innerText = `${Math.floor(totalBigMac)}`;
+    ivaDeudaInt.innerText = `$ ${ivaInt.toFixed(2)}`;
+    ivaDeuda.innerText = `$ ${ivaSaldo.toFixed(2)}`;
+    ivaChosen.innerText = `$ ${iva}%`;
+
+    consultas.push(new Consulta);
 
 };
 
@@ -167,49 +181,6 @@ class Consulta {
         this.numero = cant_conslt + 1;
         cant_conslt++;
         this.date = new Date();
-
-    }
-
-    consultar() {
-        tipoCalc = tipoCalculo();
-        tipoTime = tipoTiempo()
-        tiempo = parseInt(prompt(`Ingrese la cantidad de ${tipoTime}`));
-        amount = parseInt(prompt("Ingrese monto a tomar"));
-        interest = parseFloat(prompt('Ingrese la TNA'));
-        iva = tipoIva();
-
-        if (tipoTime == 'dias') {
-            tasaCalc = ((interest / 12) / 30);
-            intDiario = ((amount * tasaCalc) / 100);
-            ivaInt = intDiario * iva;
-            deudaDiaria = intDiario + ivaInt;
-            intTotal = intDiario * tiempo;
-
-
-        } else if (tipoTime == 'meses') {
-            tasaCalc = (interest / 12);
-            intMes = ((amount * tasaCalc) / 100);
-            deudaDiaria = deudaMes / 30;
-            ivaInt = intMes * iva;
-            deudaMes = intMes + ivaInt;
-            intTotal = intMes * tiempo;
-
-        } else {
-            alert('Te falta elegir el tiempo que te vas a tomar')
-        }
-
-        ivaSaldo = (amount * iva) / 100;
-        totalBigMac = (intTotal + ivaInt) / bigMac;
-        deudaTotal = amount + ivaInt + ivaSaldo + intTotal;
-
-
-        console.log('Interes diario: ', intDiario);
-        console.log('Deuda diaria: ', deudaDiaria);
-        console.log('Interes total: ', intTotal);
-        console.log('Deuda total: ', deudaTotal);
-        console.log('Iva del saldo: ', ivaSaldo);
-        console.log('Total de Big Mac: ', totalBigMac);
-
 
     }
 
