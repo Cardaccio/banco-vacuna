@@ -7,9 +7,26 @@ let translate = 0;
 slide = (direction) => {
     direction === "next" ? translate -= translateAmount : translate += translateAmount;
     pages.forEach(
-        pages => (pages.style.transform = `translateY(${translate}%)`),
+        pages => (pages.style.transform = `translateY(${translate}%)`)
     );
 };
+
+//control video
+let videoBack = document.getElementById("videoBack");
+let btnVideo = document.getElementById("btnVideo");
+
+btnVideo.addEventListener("click", playVideo);
+
+function playVideo(){
+    if (videoBack.paused){
+        videoBack.play();
+        btnVideo.classList.remove("btnVideo--paused");
+    }else{
+        videoBack.pause();
+        btnVideo.classList.add("btnVideo--paused");
+    }
+}
+
 
 let cantUsers = 0;
 
@@ -49,11 +66,13 @@ function Registrarse() {
         divReg.className = "registro-ok";
 
     } else {
-        users.push(new Usuario(userName.value, userMail.value, userAge.value))
+        let newUser = new Usuario(userName.value, userMail.value, userAge.value);
+        let userJson = JSON.stringify(newUser);
+        users.push(userJson);
         mensaje.innerText = "Muchas gracias por registrarte!";
         divReg.className = "registro-ok";
-
-
+        localStorage.setItem("Usuarios", users);
+     
     }
 
 };
@@ -154,6 +173,7 @@ function calcularInt(e) {
 
     } else {
         alert('Te falta elegir el tiempo que te vas a tomar')
+        
     }
 
     ivaSaldo = (amount * iva) / 100;
@@ -169,7 +189,10 @@ function calcularInt(e) {
     ivaChosen.innerText = `$ ${iva}%`;
 
     consultas.push(new Consulta);
-
+    for(let consult of consultas){
+        consult.saveDatos(tiempo, amount, interest, iva, intDiario, intMes, deudaDiaria, deudaMes, ivaSaldo, ivaInt, intTotal);
+        console.log(datos_conslt);
+    }
 };
 
 
@@ -181,24 +204,22 @@ class Consulta {
         this.numero = cant_conslt + 1;
         cant_conslt++;
         this.date = new Date();
-
+        
     }
 
-    saveDatos() {
+    saveDatos(...values) {
         datos_conslt = [{ tipoCaluculo: tipoCalc },
-        { tiempo: tipoTime },
-        { cantTiempo: tiempo },
-        { monto: amount },
-        { interes: interest },
-        { tasaCaluda: tasaCalc },
-        { tasaIva: iva },
-        { interesDia: intDiario },
-        { interesMes: intMes },
-        { deudaDia: deudaDiaria },
-        { deudaMensual: deudaMes },
-        { ivaDelSaldo: ivaSaldo },
-        { ivaDeInteres: ivaInt },
-        { totalInteres: intTotal }
+        { cantTiempo: this.tiempo },
+        { monto: this.amount },
+        { interes: this.interest },
+        { tasaIva: this.iva },
+        { interesDia: this.intDiario },
+        { interesMes: this.intMes },
+        { deudaDia: this.deudaDiaria },
+        { deudaMensual: this.deudaMes },
+        { ivaDelSaldo: this.ivaSaldo },
+        { ivaDeInteres: this.ivaInt },
+        { totalInteres: this.intTotal }
         ];
     }
 

@@ -13,10 +13,14 @@
 </head>
 
 <body>
-    <video muted loop class="video-home" src="src/media/pexels-ivan-khmelyuk-7104083.mp4"></video>
+    <video muted loop autoplay class="video-home" id="videoBack" src="src/media/pexels-ivan-khmelyuk-7104083.mp4"></video>
     <header>
+        <div class="videoCtrl">
+            <button class="btnVideo" id="btnVideo"></button>
+            <p>video on/off</p>           
+        </div>
         <div class="center">
-            <input type="checkbox" id="show">
+            <input type="checkbox" id="show" class="chechLogin">
             <label for="show" class="show-btn login">Login / Register<i
                     class="fas fa-solid fa-user-astronaut"></i></label>
             <div class="container" id="cont-user">

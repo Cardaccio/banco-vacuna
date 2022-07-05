@@ -48,7 +48,7 @@ body {
     left: 50%;
     transform: translate(-50%, -50%);
   }
-  input[type="checkbox"]{
+  .checkLogin{
     display: none;
   }
   .container{
@@ -167,6 +167,50 @@ body {
 
 }
 
+.videoCtrl{
+    position: fixed;
+    top: 2rem;
+    left: 2rem;
+
+}
+.videoCtrl p{
+    margin-top: 1rem;
+    text-transform: uppercase;
+    text-align: center;
+
+}
+.btnVideo{
+    cursor: pointer;
+    width: 7rem;
+    height: 3.5rem;
+    background: rgba(0, 0, 0, 0.562);
+    display: block;
+    border: none;
+    border-radius: 3.5rem;
+    position: relative;
+}
+
+.btnVideo:after{
+    content: '';
+    position: absolute;
+    top: 3px;
+    left: 5px;
+    width: 3rem;
+    height: 3rem;
+    background: #54395e;
+    border-radius: 3rem;
+    transition: 0.3s;
+}
+
+.btnVideo--paused {
+    background: #ff5d15;
+}
+.btnVideo--paused:after{
+    left: calc(100%-5px);
+    transform: translateX(100%);
+}
+
+
 main {
     position: relative;
     margin: 5rem auto;
@@ -225,6 +269,7 @@ main {
 
 .content-hero {
     width: 70vw;
+    height: 590px;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: 2.5fr 0.5fr 1fr 0.5fr 0.5fr;
@@ -606,7 +651,7 @@ h3 {
     }
 
     .second{
-        margin-top: 3rem;
+        margin-top: 0rem;
 
     }
     .h2-datos{
@@ -627,5 +672,7 @@ h3 {
     .h1-hero{
         font-size: 3rem;
     }
-    
+    .content-hero{
+        height: 590px;
+    }
 }
