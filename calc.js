@@ -51,6 +51,8 @@ class Usuario {
 
 
 let users = [];
+let newUser;
+let arrayUsers = [];
 
 function Registrarse() {
     let userName = document.getElementById("userName");
@@ -60,20 +62,41 @@ function Registrarse() {
     let mensaje = document.getElementById("mensaje");
     let divReg = document.getElementById("registro");
 
-    if (users.includes(userMail.value)) {
+    
+    let usersRecuperado ;
 
-        mensaje.innerText = "Ya estas registrad@!";
-        divReg.className = "registro-ok";
+    if (users.length<= 0){
+        newUser = new Usuario(userName.value, userMail.value, userAge.value);
+        //let userJson = JSON.stringify(newUser);
+        users.push(newUser);
 
-    } else {
-        let newUser = new Usuario(userName.value, userMail.value, userAge.value);
-        let userJson = JSON.stringify(newUser);
-        users.push(userJson);
-        mensaje.innerText = "Muchas gracias por registrarte!";
-        divReg.className = "registro-ok";
-        localStorage.setItem("Usuarios", users);
+        localStorage.setItem("Usuarios", JSON.stringify(users));
      
+        mensaje.innerText = "Muchas gracias por registrarte!";
+    }else{
+
+        usersRecuperado = JSON.parse(localStorage.getItem("Usuarios"));
+            if (usersRecuperado.some(e => e.mail == userMail.value)) {
+
+                mensaje.innerText = `Ups! Ya estas registrad@ ${userName.value}!`;
+                //divReg.className = "registro-ok";
+        
+            } else {
+                newUser = new Usuario(userName.value, userMail.value, userAge.value);
+                let userJson = JSON.stringify(newUser);
+                users.push(newUser);
+        
+                localStorage.setItem("Usuarios", JSON.stringify(users));
+             
+                mensaje.innerText = "Muchas gracias por registrarte!";
+                //divReg.className = "registro-ok";
+            }
     }
+    
+    
+
+
+
 
 };
 
