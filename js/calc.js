@@ -1,6 +1,5 @@
 //Pasador de paginas
 
-
 const pages = document.querySelectorAll(".page");
 const translateAmount = 105;
 let translate = 5;
@@ -93,11 +92,6 @@ function Registrarse() {
         }
     }
 
-
-
-
-
-
 };
 
 //Registro de consultas
@@ -180,6 +174,7 @@ function calcularInt(e) {
     let totDev = document.getElementById("totDev");
     let fechaDev = document.getElementById("fechaDev");
     let finishtime;
+    let pUsd = document.getElementById("deudaUSD");
 
     if (tipoTime == 'dias') {
         let tasaCalc = ((interest / 12) / 30);
@@ -188,8 +183,8 @@ function calcularInt(e) {
         deudaDiaria = intDiario + ivaInt;
         intTotal = intDiario * tiempo;
         p_x.innerHTML = `Un total de <span>$ ${deudaDiaria.toFixed(2)}</span> pesos por dia.`
-        finishtime = luxon.DateTime.now().plus({days: tiempo}).toISODate();
-        
+        finishtime = luxon.DateTime.now().plus({ days: tiempo }).toISODate();
+
 
     } else if (tipoTime == 'meses') {
         let tasaCalc = (interest / 12);
@@ -198,7 +193,7 @@ function calcularInt(e) {
         deudaMes = intMes + ivaInt;
         intTotal = intMes * tiempo;
         p_x.innerHTML = `Un total de <span>$ ${deudaMes.toFixed(2)}</span> pesos por mes.`;
-        finishtime = luxon.DateTime.now().plus({months: tiempo}).toISODate();
+        finishtime = luxon.DateTime.now().plus({ months: tiempo }).toISODate();
 
     } else {
         Swal.fire({
@@ -206,7 +201,7 @@ function calcularInt(e) {
             title: 'No cargaste datos!',
             text: 'Igual te sigo mostrando mi web.',
             confirmButtonText: 'OK',
-            
+
         })
 
 
@@ -224,11 +219,19 @@ function calcularInt(e) {
     ivaDeuda.innerText = `$ ${ivaSaldo.toFixed(2)}`;
     ivaChosen.innerText = `$ ${iva}%`;
 
-    consultas.push(new Consulta);
-    for (let consult of consultas) {
-        consult.saveDatos(tiempo, amount, interest, iva, intDiario, intMes, deudaDiaria, deudaMes, ivaSaldo, ivaInt, intTotal);
-        console.log(datos_conslt);
-    }
+    //Calculo la deuda en USD con API
+
+    fetch('https://api-dolar-argentina.herokuapp.com/api/dolarblue')
+        .then(response => response.json)
+        .then(data => {
+            let valorUSDventa = parseFloat(data.venta);
+            console.log(valorUSDventa)
+            let deudaUSD = valorUSDventa * deudaTotal;
+            pUsd.innerText = `${deudaUSD}`
+        });
+
+    consultas.push(new Consulta(tipoTime, tiempo, amount, interest, iva, intDiario, intMes, deudaDiaria, deudaMes, ivaSaldo, ivaInt, intTotal));
+
 };
 
 
@@ -236,28 +239,36 @@ function calcularInt(e) {
 //Crear consulta
 
 class Consulta {
-    constructor() {
+    constructor(tipoTime, tiempo, amount, interest, iva, intDiario, intMes, deudaDiaria, deudaMes, ivaSaldo, ivaInt, intTotal) {
         this.numero = cant_conslt + 1;
         cant_conslt++;
-        this.date = new Date();
+        this.date = luxon.DateTime.now();
+        this.tipoCaluculo = tipoTime,
+
+            this.cantTiempo = tiempo,
+
+            this.monto = amount,
+
+            this.interes = interest,
+
+            this.tasaIva = iva,
+
+            this.interesDia = intDiario,
+
+            this.interesMes = intMes,
+
+            this.deudaDia = deudaDiaria,
+
+            this.deudaMensual = deudaMes,
+
+            this.ivaDelSaldo = ivaSaldo,
+
+            this.ivaDeInteres = ivaInt,
+
+            this.totalInteres = intTotal
 
     }
 
-    saveDatos(...values) {
-        datos_conslt = [{ tipoCaluculo: tipoCalc },
-        { cantTiempo: this.tiempo },
-        { monto: this.amount },
-        { interes: this.interest },
-        { tasaIva: this.iva },
-        { interesDia: this.intDiario },
-        { interesMes: this.intMes },
-        { deudaDia: this.deudaDiaria },
-        { deudaMensual: this.deudaMes },
-        { ivaDelSaldo: this.ivaSaldo },
-        { ivaDeInteres: this.ivaInt },
-        { totalInteres: this.intTotal }
-        ];
-    }
 
     verDatos() {
         console.log("Consulta: ", this.numero)
@@ -268,3 +279,5 @@ class Consulta {
 
     };
 }
+
+
