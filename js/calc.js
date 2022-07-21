@@ -140,6 +140,16 @@ function cambioCalc() {
 
 }
 
+//Calculo la deuda en USD con API
+
+let valorUSDventa;
+ fetch('cotizaciones.json')
+    .then( response => response.json())
+    .then(data =>{
+        valorUSDventa = parseFloat(data.venta);
+    });
+
+
 //Calcular consulta al hacer click
 
 btnCalcular.addEventListener("click", calcularInt);
@@ -219,16 +229,10 @@ function calcularInt(e) {
     ivaDeuda.innerText = `$ ${ivaSaldo.toFixed(2)}`;
     ivaChosen.innerText = `$ ${iva}%`;
 
-    //Calculo la deuda en USD con API
+    //Deuda en USD con API
+    let deudaUSD = deudaTotal/valorUSDventa;
+    pUsd.innerText = `USD ${deudaUSD.toFixed(2)}`
 
-    fetch('https://api-dolar-argentina.herokuapp.com/api/dolarblue')
-        .then(response => response.json)
-        .then(data => {
-            let valorUSDventa = parseFloat(data.venta);
-            console.log(valorUSDventa)
-            let deudaUSD = valorUSDventa * deudaTotal;
-            pUsd.innerText = `${deudaUSD}`
-        });
 
     consultas.push(new Consulta(tipoTime, tiempo, amount, interest, iva, intDiario, intMes, deudaDiaria, deudaMes, ivaSaldo, ivaInt, intTotal));
 
