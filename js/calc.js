@@ -1,99 +1,3 @@
-//Pasador de paginas
-
-const pages = document.querySelectorAll(".page");
-const translateAmount = 105;
-let translate = 5;
-slide = (direction) => {
-    direction === "next" ? translate -= translateAmount : translate += translateAmount;
-    pages.forEach(
-        pages => (pages.style.transform = `translateY(${translate}%)`)
-    );
-};
-
-//control video
-let videoBack = document.getElementById("videoBack");
-let btnVideo = document.getElementById("btnVideo");
-
-btnVideo.addEventListener("click", playVideo);
-
-function playVideo() {
-    if (videoBack.paused) {
-        videoBack.play();
-        btnVideo.classList.remove("btnVideo--paused");
-    } else {
-        videoBack.pause();
-        btnVideo.classList.add("btnVideo--paused");
-    }
-}
-
-
-let cantUsers = 0;
-
-//Registro usuario
-class Usuario {
-
-    constructor(nombre, mail, edad) {
-        this.nombre = nombre;
-        this.mail = mail;
-        this.edad = edad;
-        this.id = cantUsers + 1;
-        cantUsers++;
-    }
-
-    guardaConsulta(consulta) {
-        consulta.saveDatos();
-
-    }
-
-
-}
-
-
-let users = [];
-let newUser;
-let arrayUsers = [];
-
-function Registrarse() {
-    let userName = document.getElementById("userName");
-    let userMail = document.getElementById("userMail");
-    let userAge = document.getElementById("userAge");
-
-    let mensaje = document.getElementById("mensaje");
-    let divReg = document.getElementById("registro");
-
-
-    let usersRecuperado;
-
-    if (users.length <= 0) {
-        newUser = new Usuario(userName.value, userMail.value, userAge.value);
-        //let userJson = JSON.stringify(newUser);
-        users.push(newUser);
-
-        localStorage.setItem("Usuarios", JSON.stringify(users));
-
-        mensaje.innerText = "Muchas gracias por registrarte!";
-    } else {
-
-        usersRecuperado = JSON.parse(localStorage.getItem("Usuarios"));
-        if (usersRecuperado.some(e => e.mail == userMail.value)) {
-
-            mensaje.innerText = `Ups! Ya estas registrad@ ${userName.value}!`;
-            //divReg.className = "registro-ok";
-
-        } else {
-            newUser = new Usuario(userName.value, userMail.value, userAge.value);
-            let userJson = JSON.stringify(newUser);
-            users.push(newUser);
-
-            localStorage.setItem("Usuarios", JSON.stringify(users));
-
-            mensaje.innerText = "Muchas gracias por registrarte!";
-            //divReg.className = "registro-ok";
-        }
-    }
-
-};
-
 //Registro de consultas
 
 let consultas = [];
@@ -140,12 +44,12 @@ function cambioCalc() {
 
 }
 
-//Calculo la deuda en USD con API
+//Calculo la deuda en USD con fetch
 
 let valorUSDventa;
- fetch('cotizaciones.json')
-    .then( response => response.json())
-    .then(data =>{
+fetch('cotizaciones.json')
+    .then(response => response.json())
+    .then(data => {
         valorUSDventa = parseFloat(data.venta);
     });
 
@@ -230,7 +134,7 @@ function calcularInt(e) {
     ivaChosen.innerText = `$ ${iva}%`;
 
     //Deuda en USD con API
-    let deudaUSD = deudaTotal/valorUSDventa;
+    let deudaUSD = deudaTotal / valorUSDventa;
     pUsd.innerText = `USD ${deudaUSD.toFixed(2)}`
 
 
@@ -247,41 +151,21 @@ class Consulta {
         this.numero = cant_conslt + 1;
         cant_conslt++;
         this.date = luxon.DateTime.now();
-        this.tipoCaluculo = tipoTime,
-
-            this.cantTiempo = tiempo,
-
-            this.monto = amount,
-
-            this.interes = interest,
-
-            this.tasaIva = iva,
-
-            this.interesDia = intDiario,
-
-            this.interesMes = intMes,
-
-            this.deudaDia = deudaDiaria,
-
-            this.deudaMensual = deudaMes,
-
-            this.ivaDelSaldo = ivaSaldo,
-
-            this.ivaDeInteres = ivaInt,
-
-            this.totalInteres = intTotal
+        this.tipoCaluculo = tipoTime;
+        this.cantTiempo = tiempo;
+        this.monto = amount;
+        this.interes = interest;
+        this.tasaIva = iva;
+        this.interesDia = intDiario;
+        this.interesMes = intMes;
+        this.deudaDia = deudaDiaria;
+        this.deudaMensual = deudaMes;
+        this.ivaDelSaldo = ivaSaldo;
+        this.ivaDeInteres = ivaInt;
+        this.totalInteres = intTotal;
 
     }
 
-
-    verDatos() {
-        console.log("Consulta: ", this.numero)
-        console.log("Fecha: ", this.date)
-        for (let dato in datos_conslt) {
-            console.log(datos_conslt[dato]);
-        };
-
-    };
 }
 
 
